@@ -16,3 +16,5 @@ git config --global core.excludesfile ~/.gitignore_global
 
 # Ignore .DS_store file
 .DS_Store
+
+*~
