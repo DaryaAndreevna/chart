@@ -1,47 +1,27 @@
-$chart-width: 300px
-$chart-height: 250px
-
-$graph-width: $chart-width*0.80  //240
-$graph-height: $chart-height*0.63 //157.5
-
 .chart
-  width: $chart-width
-  height: $chart-height
-  margin: auto
   .graph
     padding: 45px 0px
     position: relative
     .y-axis
       position: absolute
       padding: 0
-      margin:  0 10%
       list-style-type: none
       border-style: none dashed none none
       border-width: 1px
-      height: $graph-height
-      color: white
       li 
         padding: 5% 10px
     .x-axis
-      width: $graph-width
-      padding: 2% 0
-      margin: 0px 20%
+      padding: 5px 0
       position: absolute
       left: 0
-      top: 81.5%
       border-style: dashed none none none
       border-width: 1px
-      color: white
       li
         display: inline
-        padding: 0px 2%
-
+        //-webkit-transform: rotate(-90deg)
+        //position: absolute
     .bars
-      width: $graph-width
-      height: $graph-height
-      margin: 0 20%
       .bar
         display: inline-block
-
     .y-axis, .bars 
       display: inline-block
