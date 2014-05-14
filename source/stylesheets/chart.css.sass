@@ -5,23 +5,31 @@
     .y-axis
       position: absolute
       padding: 0
+      margin: 0
       list-style-type: none
       border-style: none dashed none none
       border-width: 1px
       li 
-        padding: 5% 10px
+        margin: 12% 10px 0 10px
+        font-size: 13px
     .x-axis
-      padding: 5px 0
+      padding: 10px 0
       position: absolute
       left: 0
       border-style: dashed none none none
       border-width: 1px
       li
-        display: inline
-        //-webkit-transform: rotate(-90deg)
-        //position: absolute
+        width: 30px
+        display: inline-block
+        -webkit-transform: rotate(45deg)
     .bars
       .bar
         display: inline-block
+        color: white
+        .pop
+          background-color: rgba(0,0,0, 0.2)
+      .hidden
+        visibility: hidden
+
     .y-axis, .bars 
       display: inline-block

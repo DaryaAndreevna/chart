@@ -9,10 +9,11 @@ class window.Chart
     @bars = []
     @chartYMax = 0
 
-    @chartWidth = 300
+    @chartWidth = 400
     @chartHeight = 250
     @graphWidth = @chartWidth * 0.80
     @graphHeight = @chartHeight * 0.63
+
   draw: (data) ->
     @content(data)
     @createAxis()
@@ -36,7 +37,8 @@ class window.Chart
       $('<li>' + y + '</li>').appendTo(yAxislist)
     yAxislist.appendTo(@graphContainer)
 
-    padding = @graphWidth * 0.01
+
+    marginRight = @graphWidth * 0.06
     xAxislist = $('<ul class = "x-axis"></ul>')
     xAxislist.css({
       width: @graphWidth + 30
@@ -46,9 +48,10 @@ class window.Chart
       })
     for x in @xLegend 
       $('<li>' + x + '</li>')
-        .css('padding':'0 ' + padding + 'px')
+        .css('margin-right', marginRight + 'px')
         .appendTo(xAxislist)
     xAxislist.appendTo(@graphContainer)
+
   createGraph:  =>
     @container.css({
       width:  @chartWidth
@@ -64,10 +67,18 @@ class window.Chart
       bar = {}
       bar.label  = value
       bar.height = Math.floor(bar.label / @chartYMax * 100) + '%'
-      bar.div = $('<div class = "bar fig'+ i + '">' + bar.label + '</div>')
+      
+      bar.div = $('<div class = "bar fig'+ i + '"></div>').hover(@popUp)
         .appendTo(@barContainer)
+      pop = $('<div class = "pop hidden">' + bar.label + '</div>')
+        .appendTo(bar.div)
+
+
+
       @bars.push(bar)
       @barContainer.insertAfter(@graphContainer.children().eq(0))
+
+
   displayGraph:  =>
     width = Math.floor((@graphWidth) / @bars.length * 0.7)
     margin = Math.floor((@graphWidth) / @bars.length * 0.16)
@@ -86,4 +97,9 @@ class window.Chart
     for i in [0...6]
       color += letters[Math.floor(Math.random() * 16)];
     color
+  popUp:(e) =>
+    e.preventDefault()
+    e.stopPropagation()
+    $(e.target).find(">:first-child").toggleClass("hidden")
+    console.log e.target
   resetGraph: () ->
