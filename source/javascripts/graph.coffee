@@ -33,17 +33,28 @@ class window.Chart
       height: @graphHeight + 10
       margin: '0'
       })
-    fontSize = (@graphHeight / @chartYMax) * 0.8
-    margin = (@graphHeight /  @chartYMax - fontSize )/ 2
-    console.log [fontSize, margin]
-    for y in [@chartYMax..0] 
-      $('<li>' + y + '</li>')
-      .css({
-        'font-size': fontSize
-        margin: margin + 'px 10px'
-        #margin: 'auto'
-        })
-      .appendTo(yAxislist)
+    step = Math.ceil(@chartYMax / 5)
+    number = Math.floor(@chartYMax / step + 1) 
+    margin = '0 10px 20px 10px'
+    if number is 6
+      
+      @yLastValue = @chartYMax 
+    else 
+      #margin = '0 10px ' + (20+(6-number)*10) + 'px 10px'
+      for i in [@chartYMax..@chartYMax + 5] 
+        if i % 5 is 0
+          @yLastValue = i
+          break
+    console.log [ step, number, margin, @yLastValue]
+    for y in [@yLastValue..0] 
+      if y % step is 0
+        $('<li>' + y + '</li>')
+        .css({
+          'font-size': '12px'
+          #margin: margin + 'px 10px'
+          margin: margin
+          })
+        .appendTo(yAxislist)
     yAxislist.appendTo(@graphContainer)
 
     width  =  @graphWidth / @xLegend.length
@@ -77,7 +88,8 @@ class window.Chart
     for value,i in @yLegend
       bar = {}
       bar.label  = value
-      bar.height = Math.floor(bar.label / @chartYMax * 100) + '%'
+      bar.height = Math.floor(bar.label / @yLastValue * 100) + '%'
+      console.log @yLastValue
 
       bar.div = $('<div class = "bar fig'+ i + '"></div>').hover(
         () ->
@@ -96,13 +108,15 @@ class window.Chart
 
   displayGraph:  =>
     width = Math.floor((@graphWidth) / @bars.length * 0.7)
-    margin = Math.floor((@graphWidth) / @bars.length * 0.16)
+    marginX = Math.floor((@graphWidth) / @bars.length * 0.16)
+    marginY = ((@yLastValue - @chartYMax) / @yLastValue * 50) + '%'
+    console.log 'margin' + marginY
     for bar,i in @bars
       bar.div.css({
         'background-color': @randomColor()
         'vertical-align':'bottom'
         'width': width
-        'margin': '0 ' + margin + 'px'})
+        'margin': marginY + ' ' + marginX + 'px'})
       bar.div.animate { 
         height: bar.height
       }, 400
