@@ -25,20 +25,28 @@ class window.Chart
       unless i is 0
         @xLegend.push(pair[0])
         @yLegend.push(pair[1])
-        if pair[1] > @chartYMax then @chartYMax = pair[1]
+        if parseInt(pair[1]) > @chartYMax then @chartYMax = parseInt(pair[1])
   createAxis: =>
     yAxislist = $('<ul class = "y-axis"></ul>')
     yAxislist.css({
       color: 'white'
-      height: @graphHeight
+      height: @graphHeight + 10
       margin: '0'
       })
+    fontSize = (@graphHeight / @chartYMax) * 0.8
+    margin = (@graphHeight /  @chartYMax - fontSize )/ 2
+    console.log [fontSize, margin]
     for y in [@chartYMax..0] 
-      $('<li>' + y + '</li>').appendTo(yAxislist)
+      $('<li>' + y + '</li>')
+      .css({
+        'font-size': fontSize
+        margin: margin + 'px 10px'
+        #margin: 'auto'
+        })
+      .appendTo(yAxislist)
     yAxislist.appendTo(@graphContainer)
 
-
-    marginRight = @graphWidth * 0.06
+    width  =  @graphWidth / @xLegend.length
     xAxislist = $('<ul class = "x-axis"></ul>')
     xAxislist.css({
       width: @graphWidth + 30
@@ -48,7 +56,10 @@ class window.Chart
       })
     for x in @xLegend 
       $('<li>' + x + '</li>')
-        .css('margin-right', marginRight + 'px')
+        .css({
+          width: width
+          margin: '10px 0'
+          })
         .appendTo(xAxislist)
     xAxislist.appendTo(@graphContainer)
 
@@ -67,9 +78,6 @@ class window.Chart
       bar = {}
       bar.label  = value
       bar.height = Math.floor(bar.label / @chartYMax * 100) + '%'
-      
-      #bar.div = $('<div class = "bar fig'+ i + '"></div>').hover(@popUp)
-      #  .appendTo(@barContainer)
 
       bar.div = $('<div class = "bar fig'+ i + '"></div>').hover(
         () ->
@@ -77,7 +85,6 @@ class window.Chart
         () ->
           $(this).find(">:first-child").addClass('hidden')
       ).appendTo(@barContainer)
-
 
 
       pop = $('<div class = "pop hidden">' + bar.label + '</div>')
