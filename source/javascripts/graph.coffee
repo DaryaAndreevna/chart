@@ -20,50 +20,56 @@ class window.Chart
     @createGraph()
     @graphContainer.appendTo(@container)
     @displayGraph()
+
   content: (data) =>
     for pair,i in data
       unless i is 0
-        @xLegend.push(pair[0])
-        @yLegend.push(pair[1])
-        if parseInt(pair[1]) > @chartYMax then @chartYMax = parseInt(pair[1])
+        xValue = pair[0]
+        yValue = parseInt(pair[1])
+        @xLegend.push(xValue)
+        @yLegend.push(yValue)
+        if yValue > @chartYMax then @chartYMax = yValue
+
   createAxis: =>
+    @createYAxis()
+    @createXAxis()
+
+
+  createYAxis: =>
     yAxislist = $('<ul class = "y-axis"></ul>')
     yAxislist.css({
-      color: 'white'
-      height: @graphHeight + 10
-      margin: '0'
+      height: @graphHeight
       })
+
     step = Math.ceil(@chartYMax / 5)
-    number = Math.floor(@chartYMax / step + 1) 
-    margin = '0 10px 20px 10px'
-    if number is 6
-      
+    numberOfYCoord = Math.ceil(@chartYMax / step)
+    margin = '0 10px 17px 10px'
+    if @chartYMax % 5 is 0
       @yLastValue = @chartYMax 
     else 
-      #margin = '0 10px ' + (20+(6-number)*10) + 'px 10px'
-      for i in [@chartYMax..@chartYMax + 5] 
-        if i % 5 is 0
+      margin = '0 10px ' + (17+(5-numberOfYCoord)*10) + 'px 10px'
+      for i in [@chartYMax..@chartYMax + step] 
+        if i % step is 0
           @yLastValue = i
           break
-    console.log [ step, number, margin, @yLastValue]
     for y in [@yLastValue..0] 
       if y % step is 0
         $('<li>' + y + '</li>')
         .css({
           'font-size': '12px'
-          #margin: margin + 'px 10px'
           margin: margin
           })
         .appendTo(yAxislist)
     yAxislist.appendTo(@graphContainer)
 
+  createXAxis: =>
     width  =  @graphWidth / @xLegend.length
     xAxislist = $('<ul class = "x-axis"></ul>')
     xAxislist.css({
       width: @graphWidth + 30
       margin: '0 30px'
       color: 'white'
-      top: @chartHeight * 0.81
+      top: @chartHeight * 0.8
       })
     for x in @xLegend 
       $('<li>' + x + '</li>')
@@ -73,6 +79,7 @@ class window.Chart
           })
         .appendTo(xAxislist)
     xAxislist.appendTo(@graphContainer)
+
 
   createGraph:  =>
     @container.css({
@@ -89,7 +96,6 @@ class window.Chart
       bar = {}
       bar.label  = value
       bar.height = Math.floor(bar.label / @yLastValue * 100) + '%'
-      console.log @yLastValue
 
       bar.div = $('<div class = "bar fig'+ i + '"></div>').hover(
         () ->
@@ -110,7 +116,6 @@ class window.Chart
     width = Math.floor((@graphWidth) / @bars.length * 0.7)
     marginX = Math.floor((@graphWidth) / @bars.length * 0.16)
     marginY = ((@yLastValue - @chartYMax) / @yLastValue * 50) + '%'
-    console.log 'margin' + marginY
     for bar,i in @bars
       bar.div.css({
         'background-color': @randomColor()
