@@ -68,12 +68,20 @@ class window.Chart
       bar.label  = value
       bar.height = Math.floor(bar.label / @chartYMax * 100) + '%'
       
-      bar.div = $('<div class = "bar fig'+ i + '"></div>').hover(@popUp)
-        .appendTo(@barContainer)
+      #bar.div = $('<div class = "bar fig'+ i + '"></div>').hover(@popUp)
+      #  .appendTo(@barContainer)
+
+      bar.div = $('<div class = "bar fig'+ i + '"></div>').hover(
+        () ->
+          $(this).find(">:first-child").removeClass('hidden')
+        () ->
+          $(this).find(">:first-child").addClass('hidden')
+      ).appendTo(@barContainer)
+
+
+
       pop = $('<div class = "pop hidden">' + bar.label + '</div>')
         .appendTo(bar.div)
-
-
 
       @bars.push(bar)
       @barContainer.insertAfter(@graphContainer.children().eq(0))
