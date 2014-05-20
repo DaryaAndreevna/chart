@@ -1,8 +1,17 @@
+$chart-width: 400px
+$chart-height: 250px
+$graph-width: $chart-width * 0.8
+$graph-height: $chart-height * 0.63
+
 .chart
   .graph
     padding: 45px 0px
     position: relative
+    height: $chart-height
+    width: $chart-width
+    margin: auto
     .y-axis
+      height: $graph-height
       color: white
       margin: 0
       position: absolute
@@ -14,19 +23,29 @@
       top: 40px
       width: 30px
       li 
+        font-size: 12px
     .x-axis
+      width: $graph-width + 30
+      margin: 0 30px
+      color: white
+      top: $chart-height * 0.8
       padding: 10px 0
       position: absolute
       left: 0
       border-style: dashed none none none
       border-width: 2px
       li
+        margin: 10px 0
         display: inline-block
         -webkit-transform: rotate(45deg)
     .bars
+      width: $graph-width
+      height: $graph-height
+      margin: 0 40px
       .bar
         display: inline-block
         color: white
+        vertical-align: bottom
         .pop
           background-color: rgba(0,0,0, 0.2)
       .hidden
