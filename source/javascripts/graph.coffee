@@ -18,6 +18,7 @@ class window.Chart
     @content(data)
     @createAxis()
     @createGraph()
+    @barContainer.insertAfter(@graphContainer.children().eq(0))
     @graphContainer.appendTo(@container)
     @displayGraph()
 
@@ -79,7 +80,6 @@ class window.Chart
 
       @popUp(bar.div)
       @bars.push(bar)
-      @barContainer.insertAfter(@graphContainer.children().eq(0))
 
   displayGraph:  =>
     width = Math.floor((@graphWidth) / @bars.length * 0.7)

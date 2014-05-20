@@ -6,42 +6,43 @@ $graph-height: $chart-height * 0.63
 .chart
   .graph
     padding: 45px 0px
+    margin: auto
     position: relative
     height: $chart-height
     width: $chart-width
-    margin: auto
     .y-axis
-      height: $graph-height
-      color: white
-      margin: 0
-      position: absolute
       padding: 0
       margin: 0
-      list-style-type: none
-      border-style: none dashed none none
-      border-width: 2px
+      position: absolute
       top: 40px
+      height: $graph-height
       width: 30px
+      color: white
+      border:
+        style: none dashed none none
+        width: 2px
+      list-style-type: none
       li 
         font-size: 12px
     .x-axis
-      width: $graph-width + 30
       margin: 0 30px
-      color: white
-      top: $chart-height * 0.8
       padding: 10px 0
       position: absolute
       left: 0
-      border-style: dashed none none none
-      border-width: 2px
+      top: $chart-height * 0.8
+      width: $graph-width + 30
+      color: white
+      border:
+        style: dashed none none none
+        width: 2px
       li
         margin: 10px 0
         display: inline-block
         -webkit-transform: rotate(45deg)
     .bars
+      margin: 0 40px
       width: $graph-width
       height: $graph-height
-      margin: 0 40px
       .bar
         display: inline-block
         color: white
@@ -50,6 +51,5 @@ $graph-height: $chart-height * 0.63
           background-color: rgba(0,0,0, 0.2)
       .hidden
         visibility: hidden
-
     .y-axis, .bars 
       display: inline-block
