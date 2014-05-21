@@ -16,3 +16,4 @@ gem "tzinfo-data", platforms: [:mswin, :mingw]
 gem "slim"
 gem "coffee-script"
 gem "jquery-middleman"
+gem "middleman-gh-pages"
