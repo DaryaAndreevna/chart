@@ -1,0 +1,57 @@
+/* line 7, /home/daria/work/tasks/chart_bar/source/stylesheets/chart.css.sass */
+.chart .graph {
+  padding: 45px 0px;
+  margin: auto;
+  position: relative;
+  height: 250px;
+  width: 400px; }
+  /* line 13, /home/daria/work/tasks/chart_bar/source/stylesheets/chart.css.sass */
+  .chart .graph .y-axis {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 40px;
+    height: 157.5px;
+    width: 30px;
+    color: white;
+    border-style: none dashed none none;
+    border-width: 2px;
+    list-style-type: none; }
+    /* line 25, /home/daria/work/tasks/chart_bar/source/stylesheets/chart.css.sass */
+    .chart .graph .y-axis li {
+      font-size: 12px; }
+  /* line 27, /home/daria/work/tasks/chart_bar/source/stylesheets/chart.css.sass */
+  .chart .graph .x-axis {
+    margin: 0 30px;
+    padding: 10px 0;
+    position: absolute;
+    left: 0;
+    top: 200px;
+    width: 350px;
+    color: white;
+    border-style: dashed none none none;
+    border-width: 2px; }
+    /* line 38, /home/daria/work/tasks/chart_bar/source/stylesheets/chart.css.sass */
+    .chart .graph .x-axis li {
+      margin: 10px 0;
+      display: inline-block;
+      -webkit-transform: rotate(45deg); }
+  /* line 42, /home/daria/work/tasks/chart_bar/source/stylesheets/chart.css.sass */
+  .chart .graph .bars {
+    margin: 0 40px;
+    width: 320px;
+    height: 157.5px; }
+    /* line 46, /home/daria/work/tasks/chart_bar/source/stylesheets/chart.css.sass */
+    .chart .graph .bars .bar {
+      display: inline-block;
+      color: white;
+      vertical-align: bottom; }
+      /* line 50, /home/daria/work/tasks/chart_bar/source/stylesheets/chart.css.sass */
+      .chart .graph .bars .bar .pop {
+        background-color: rgba(0, 0, 0, 0.2); }
+    /* line 52, /home/daria/work/tasks/chart_bar/source/stylesheets/chart.css.sass */
+    .chart .graph .bars .hidden {
+      visibility: hidden; }
+  /* line 54, /home/daria/work/tasks/chart_bar/source/stylesheets/chart.css.sass */
+  .chart .graph .y-axis, .chart .graph .bars {
+    display: inline-block; }
